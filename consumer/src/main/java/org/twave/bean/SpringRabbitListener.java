@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.twave.entity.Task;
 import org.twave.util.RedisUtil;
 
-import javax.annotation.Resource;
 
 import static org.twave.constants.Names.TASK_QUEUE_NAME;
 
