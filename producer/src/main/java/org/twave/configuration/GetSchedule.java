@@ -30,15 +30,17 @@ public class GetSchedule {
     public void getSchedule() {
         List<Map<String, String>> list = redisUtil.getAllSchedule();
         if (list == null || list.size() == 0) {
-            System.out.print("\r当前没有任务");
+            System.out.print("\r当前没有任务在运行");
         } else {
             System.out.print("\r所有任务进度：");
             for (Map<String, String> map : list) {
-                System.out.printf("任务%s 服务器%s 进度%s/%s; ",
+                float progress = Float.parseFloat(list.get(0).get("now")) /
+                        Float.parseFloat(list.get(0).get("all")) * 100;
+                progress = Math.round(progress * 100) / 100f;
+                System.out.printf("任务%s 运行在%s上 进度%s; ",
                         map.get("taskId"),
                         map.get("serviceName"),
-                        map.get("now"),
-                        map.get("all"));
+                        progress + "%");
             }
         }
     }
