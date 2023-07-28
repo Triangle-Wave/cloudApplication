@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.twave.mapper.TaskMapper">
+
+    <resultMap id="BaseResultMap" type="org.twave.entity.Task">
+            <id property="taskId" column="task_id" jdbcType="INTEGER"/>
+            <result property="printCharacters" column="print_characters" jdbcType="VARCHAR"/>
+            <result property="num" column="num" jdbcType="INTEGER"/>
+            <result property="intervalTime" column="interval_time" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        task_id,print_characters,num,
+        interval_time
+    </sql>
+</mapper>

@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>service1</module>
-        <module>service2</module>
+        <module>producer</module>
+        <module>consumer</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -29,6 +29,9 @@
         <amqp.version>2.7.3</amqp.version>
         <junit.version>4.13.2</junit.version>
         <test.version>3.1.1</test.version>
+        <fastjson2.version>2.0.37</fastjson2.version>
+        <redis.version>3.1.1</redis.version>
+        <redisCommonsPool.version>2.11.1</redisCommonsPool.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -82,6 +85,22 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${test.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!--Alibaba fastjson包，用于处理JSON-->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${redisCommonsPool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
