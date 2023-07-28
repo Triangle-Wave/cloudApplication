@@ -32,8 +32,13 @@ public class GetSchedule {
         if (list == null || list.size() == 0) {
             System.out.print("\r当前没有任务");
         } else {
+            System.out.print("\r所有任务进度：");
             for (Map<String, String> map : list) {
-                System.out.println("\r" + map);
+                System.out.printf("任务%s 服务器%s 进度%s/%s; ",
+                        map.get("taskId"),
+                        map.get("serviceName"),
+                        map.get("now"),
+                        map.get("all"));
             }
         }
     }
