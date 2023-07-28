@@ -33,8 +33,7 @@ public class GetSchedule {
             System.out.print("\r当前没有任务");
         } else {
             for (Map<String, String> map : list) {
-                System.out.println(map);
-                System.out.print("打印");
+                System.out.println("\r" + map);
             }
         }
     }
