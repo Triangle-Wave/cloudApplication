@@ -26,6 +26,7 @@ public class StartTask implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) {
+        // 调用TaskServiceImpl的sendTaskToMq方法将所有任务添加到消息队列中
         taskService.sendTaskToMq();
     }
 }

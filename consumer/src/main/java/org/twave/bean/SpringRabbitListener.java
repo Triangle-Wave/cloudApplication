@@ -22,7 +22,8 @@ public class SpringRabbitListener {
     // 监听TASK_QUEUE_NAME队列
     @RabbitListener(queues = TASK_QUEUE_NAME)
     public void listenQueue(String message) {
-        // 获取到任务
+        // 获取任务，策略是每次获取一个任务，消费完后再继续获取
+        // 解析JSON字符串为Task对象
         Task task = JSON.parseObject(message, Task.class);
         System.out.printf("\n收到编号为 %s 的任务，打印 %s 个 %s 符号，时间间隔 %s 毫秒\n",
                 task.getTaskId(),
@@ -38,6 +39,7 @@ public class SpringRabbitListener {
                 throw new RuntimeException(e);
             }
             num -= 1;
+            // 调用sendSchedule方法将当前进度上传到Redis中
             redisUtil.sendSchedule(task.getTaskId(), num, task.getNum());
         }
         // 任务结束以后删除Redis中的记录
