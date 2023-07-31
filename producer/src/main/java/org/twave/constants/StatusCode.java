@@ -49,4 +49,8 @@ public class StatusCode {
      */
     public static final int LOCK_USED = 6008;
 
+    /**
+     * 添加任务失败
+     */
+    public static final int INSERT_TASK_ERROR = 6009;
 }

@@ -1,7 +1,7 @@
 package org.twave.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.twave.controller.exception.sqlException.InsertTaskException;
 import org.twave.entity.Task;
 import org.twave.service.TaskService;
 import org.twave.mapper.TaskMapper;
@@ -35,8 +35,26 @@ public class TaskServiceImpl implements TaskService {
         List<Task> taskList = taskMapper.getAllTask();
         for (Task task : taskList) {
             // 将每一个任务打包成JSON字符串，送入消息队列
-            String jsonString = JSON.toJSONString(task);
-            sendMessage.sendMessageToQueue(TASK_QUEUE_NAME, jsonString);
+            sendTask(task);
+        }
+    }
+
+    private void sendTask(Task task) {
+        String jsonString = JSON.toJSONString(task);
+        sendMessage.sendMessageToQueue(TASK_QUEUE_NAME, jsonString);
+    }
+
+    /**
+     * 添加任务到数据库和MQ
+     *
+     * @param task 任务实体类
+     */
+    @Override
+    public void addTask(Task task) {
+        int result = taskMapper.addTask(task);
+        sendTask(task);
+        if (result == 0) {
+            throw new InsertTaskException("添加任务失败");
         }
     }
 }

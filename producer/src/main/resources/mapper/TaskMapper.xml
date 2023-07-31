@@ -5,16 +5,20 @@
 <mapper namespace="org.twave.mapper.TaskMapper">
 
     <resultMap id="BaseResultMap" type="org.twave.entity.Task">
-            <id property="taskId" column="task_id" jdbcType="INTEGER"/>
-            <result property="printCharacters" column="print_characters" jdbcType="VARCHAR"/>
-            <result property="num" column="num" jdbcType="INTEGER"/>
-            <result property="intervalTime" column="interval_time" jdbcType="INTEGER"/>
+        <id property="taskId" column="task_id" jdbcType="INTEGER"/>
+        <result property="printCharacters" column="print_characters" jdbcType="VARCHAR"/>
+        <result property="num" column="num" jdbcType="INTEGER"/>
+        <result property="intervalTime" column="interval_time" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         task_id,print_characters,num,
         interval_time
     </sql>
+    <insert id="addTask" useGeneratedKeys="true" keyProperty="taskId">
+        INSERT INTO task (print_characters, num, interval_time)
+        VALUES (#{printCharacters}, #{num}, #{intervalTime})
+    </insert>
     <select id="getAllTask" resultType="org.twave.entity.Task">
         SELECT *
         FROM task;

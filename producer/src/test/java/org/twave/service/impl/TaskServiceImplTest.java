@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.twave.entity.Task;
 
 import javax.annotation.Resource;
 
@@ -22,5 +23,14 @@ public class TaskServiceImplTest {
     @Test
     public void sendTaskToMq() {
         taskService.sendTaskToMq();
+    }
+
+    @Test
+    public void addTask() {
+        Task task = new Task();
+        task.setPrintCharacters("+");
+        task.setNum(10);
+        task.setIntervalTime(352);
+        taskService.addTask(task);
     }
 }

@@ -17,6 +17,8 @@ import java.util.List;
 public interface TaskMapper {
     // 获取所有任务
     List<Task> getAllTask();
+
+    int addTask(Task task);
 }
 
 

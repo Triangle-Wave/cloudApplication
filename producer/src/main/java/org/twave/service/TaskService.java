@@ -1,6 +1,8 @@
 package org.twave.service;
 
 
+import org.twave.entity.Task;
+
 /**
  * 任务Service
  *
@@ -13,4 +15,9 @@ public interface TaskService {
      * 将任务发送到MQ
      */
     void sendTaskToMq();
+
+    /**
+     * 添加任务到数据库和MQ
+     */
+    void addTask(Task task);
 }

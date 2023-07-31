@@ -3,6 +3,7 @@ package org.twave.controller;
 import org.twave.controller.exception.fileException.*;
 import org.twave.controller.exception.hostException.UnknownHostException;
 import org.twave.controller.exception.lockException.LockUsedException;
+import org.twave.controller.exception.sqlException.InsertTaskException;
 import org.twave.util.JSONResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -31,7 +32,8 @@ public class BaseController {
             UnknownHostException.class,
             FileNotExistException.class,
             FileIoException.class,
-            LockUsedException.class
+            LockUsedException.class,
+            InsertTaskException.class
     })
     public JSONResult<Void> handleException(Throwable e) {
         JSONResult<Void> result = new JSONResult<>();
@@ -59,6 +61,9 @@ public class BaseController {
         } else if (e instanceof LockUsedException) {
             result.setState(LOCK_USED);
             result.setMessage("锁被占用");
+        } else if (e instanceof InsertTaskException) {
+            result.setState(INSERT_TASK_ERROR);
+            result.setMessage("添加任务失败");
         }
         return result;
     }
